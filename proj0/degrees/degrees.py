@@ -92,8 +92,37 @@ def shortest_path(source, target):
     If no possible path, returns None.
     """
 
-    # TODO
-    raise NotImplementedError
+    # 1: Emma Watson and Tracey Ullman starred in The Tale of Despereaux
+    # 2: Tracey Ullman and Michelle Pfeiffer starred in I Could Never Be Your Woman
+    # 3: Michelle Pfeiffer and Jennifer Lawrence starred in Mother!
+
+    visited = set()
+    start = Node(state=source, parent=None, action=None)
+    q = QueueFrontier()
+    q.add(start)
+
+    while True:
+        if q.empty():
+            return None
+
+        node = q.remove()
+
+        for movie, person in neighbors_for_person(node.state):
+            if (movie, person) not in visited:
+                visited.add((movie, person))
+                child = Node(state=person, parent=node, action=movie)
+
+                if person == target:
+                    res = []
+                    while child.parent != None:
+                        movie = child.action
+                        person = child.state
+                        res.append((movie, person))
+                        child = child.parent
+                    res.reverse()
+                    return res
+                else:
+                    q.add(child)
 
 
 def person_id_for_name(name):
