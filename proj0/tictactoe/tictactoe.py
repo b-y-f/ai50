@@ -124,11 +124,25 @@ def utility(board) -> int:
         return -1
     else:
         return 0
-    
 
 
 def minimax(board) -> tuple:
     """
     Returns the optimal action for the current player on the board.
     """
-    raise NotImplementedError
+
+    def maxScore(imagineBoard, score) -> int:
+        # TODO make basic minmax without prune, just make sure everything works
+        # TODO then try to use alpha-beta prune technology to optimzed the AI
+        if terminal(imagineBoard):
+            return score
+        if player(imagineBoard) == X:
+            XScore = float("-inf")
+
+    currBestMove = None
+    bestScore = float("-inf")
+    for i in range(3):
+        for j in range(3):
+            if maxScore(i, j) > bestScore:
+                currBestMove = (i, j)
+    return currBestMove
