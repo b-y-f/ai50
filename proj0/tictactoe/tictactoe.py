@@ -18,7 +18,7 @@ def initial_state():
     return [[EMPTY, EMPTY, EMPTY], [EMPTY, EMPTY, EMPTY], [EMPTY, EMPTY, EMPTY]]
 
 
-def player(board) -> Literal:
+def player(board) -> str:
     """
     Returns player who has the next turn on a board.
     The player function should take a board state as input, and return which player’s turn it is (either X or O).
@@ -67,7 +67,7 @@ def result(board, action) -> List:
     """
     i, j = action
     newBoard = copy.deepcopy(board)
-    # if newBoard[i][j] == EMPTY:
+    # if not action:
     #     raise Exception
     if player(newBoard) == X:
         newBoard[i][j] = X
@@ -76,7 +76,7 @@ def result(board, action) -> List:
     return newBoard
 
 
-def winner(board) -> str|None:
+def winner(board) -> str | None:
     """
     Returns the winner of the game, if there is one.
     The winner function should accept a board as input, and return the winner of the board if there is one.
@@ -131,31 +131,35 @@ def minimax(board) -> tuple:
     """
     Returns the optimal action for the current player on the board.
     """
+    bestMove = (0, 0)
 
-    def calcScore(action, imagineBoard) -> int:
+    def calcScore(imagineBoard, isX, depth) -> float | int:
         # 1. make basic minmax without prune, just make sure everything works
         # TODO then try to use alpha-beta prune technology to optimzed the AI
-        if terminal(imagineBoard):
-            return utility(board)
-        if player(imagineBoard) == X:
-            XScore = float("-inf")
-            afterAction = result(imagineBoard, action)
-            for action in actions(afterAction):
-                score = calcScore(action, afterAction)
-                XScore = max(XScore, score)
-            return XScore
-        else:
-            OScore = float("inf")
-            afterAction = result(imagineBoard, action)
-            for action in actions(afterAction):
-                score = calcScore(action, afterAction)
-                OScore = min(OScore, score)
-            return OScore
+        nonlocal bestMove
 
-    currBestMove = None
-    bestScore = float("-inf") if player(board) == X else float("inf")
-    for action in actions(board):
-        if calcScore(action, board) != bestScore:
-            bestScore = calcScore(action, board)
-            currBestMove = action
-    return currBestMove
+        if terminal(imagineBoard) or depth == 0:
+            return utility(board)
+
+        elif isX:
+            maxV = -math.inf
+            for action in actions(board):
+                newBoard = result(board, action)
+                score = calcScore(newBoard, False, depth - 1)
+                if score > maxV:
+                    maxV = score
+                    bestMove = action
+            return maxV
+        else:
+            minV = math.inf
+            for action in actions(board):
+                newBoard = result(board, action)
+                score = calcScore(newBoard, True, depth - 1)
+                if score < minV:
+                    minV = score
+                    bestMove = action
+            return minV
+
+    AI = player(board)
+    calcScore(board, AI == X, 3)
+    return bestMove
