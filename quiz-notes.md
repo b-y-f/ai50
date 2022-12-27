@@ -8,6 +8,8 @@ Between depth first search (DFS) and breadth first search (BFS), which will find
 - __BFS will sometimes, but not always, find a shorter path than DFS__
 - Both algorithms will always find paths of the same length
 
+__Note__: In `degrees` project, we will find the shortest path, understand this could help solve that project easier.
+
 ---
 
 The following question will ask you about the below maze. Grey cells indicate walls. A search algorithm was run on this maze, and found the yellow highlighted path from point A to B. In doing so, the red highlighted cells were the states explored but that did not lead to the goal.
