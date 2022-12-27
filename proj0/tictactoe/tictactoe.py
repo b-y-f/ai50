@@ -144,5 +144,6 @@ def minimax(board) -> tuple:
     for i in range(3):
         for j in range(3):
             if maxScore(i, j) > bestScore:
+                bestScore = maxScore(i, j) 
                 currBestMove = (i, j)
     return currBestMove
