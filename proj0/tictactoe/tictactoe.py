@@ -131,7 +131,7 @@ def minimax(board) -> tuple:
     """
     Returns the optimal action for the current player on the board.
     """
-    bestMove = (0, 0)
+    bestMove = ()
 
     def calcScore(imagineBoard, isX, depth) -> float | int:
         # 1. make basic minmax without prune, just make sure everything works
@@ -139,12 +139,12 @@ def minimax(board) -> tuple:
         nonlocal bestMove
 
         if terminal(imagineBoard) or depth == 0:
-            return utility(board)
+            return utility(imagineBoard)
 
         elif isX:
             maxV = -math.inf
-            for action in actions(board):
-                newBoard = result(board, action)
+            for action in actions(imagineBoard):
+                newBoard = result(imagineBoard, action)
                 score = calcScore(newBoard, False, depth - 1)
                 if score > maxV:
                     maxV = score
@@ -152,8 +152,8 @@ def minimax(board) -> tuple:
             return maxV
         else:
             minV = math.inf
-            for action in actions(board):
-                newBoard = result(board, action)
+            for action in actions(imagineBoard):
+                newBoard = result(imagineBoard, action)
                 score = calcScore(newBoard, True, depth - 1)
                 if score < minV:
                     minV = score
@@ -161,5 +161,6 @@ def minimax(board) -> tuple:
             return minV
 
     AI = player(board)
-    calcScore(board, AI == X, 3)
+    score = calcScore(board, AI == X, 100)
+    print(score)
     return bestMove
