@@ -106,6 +106,8 @@ def terminal(board) -> bool:
     """
     Returns True if game is over, False otherwise.
     """
+    if winner(board):
+        return True
     for row in board:
         for cell in row:
             if cell == EMPTY:
