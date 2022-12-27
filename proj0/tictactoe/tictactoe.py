@@ -130,19 +130,30 @@ def minimax(board) -> tuple:
     Returns the optimal action for the current player on the board.
     """
 
-    def maxScore(imagineBoard, score) -> int:
-        # TODO make basic minmax without prune, just make sure everything works
+    def calcScore(action, imagineBoard) -> int:
+        # 1. make basic minmax without prune, just make sure everything works
         # TODO then try to use alpha-beta prune technology to optimzed the AI
         if terminal(imagineBoard):
-            return score
+            return utility(board)
         if player(imagineBoard) == X:
             XScore = float("-inf")
+            afterAction = result(imagineBoard, action)
+            for action in actions(afterAction):
+                score = calcScore(action, afterAction)
+                XScore = max(XScore, score)
+            return XScore
+        else:
+            OScore = float("inf")
+            afterAction = result(imagineBoard, action)
+            for action in actions(afterAction):
+                score = calcScore(action, afterAction)
+                OScore = min(OScore, score)
+            return OScore
 
     currBestMove = None
-    bestScore = float("-inf")
-    for i in range(3):
-        for j in range(3):
-            if maxScore(i, j) > bestScore:
-                bestScore = maxScore(i, j) 
-                currBestMove = (i, j)
+    bestScore = float("-inf") if player(board) == X else float("inf")
+    for action in actions(board):
+        if calcScore(action, board) != bestScore:
+            bestScore = calcScore(action, board)
+            currBestMove = action
     return currBestMove
