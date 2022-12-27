@@ -3,7 +3,7 @@ Tic Tac Toe Player
 """
 
 import math
-from typing import List, Literal
+from typing import List
 import copy
 
 X = "X"
@@ -76,7 +76,7 @@ def result(board, action) -> List:
     return newBoard
 
 
-def winner(board) -> Literal:
+def winner(board) -> str|None:
     """
     Returns the winner of the game, if there is one.
     The winner function should accept a board as input, and return the winner of the board if there is one.
