@@ -88,15 +88,17 @@ def winner(board) -> str | None:
     winner = None
     # Hertizotal test
     for i in range(3):
-        if board[i][0] == board[i][1] == board[i][2]:
+        if board[i][0] == board[i][1] == board[i][2] and board[i][0] != EMPTY:
             winner = board[i][0]
     # Vertical test
     for i in range(3):
-        if board[0][i] == board[1][i] == board[2][i]:
+        if board[0][i] == board[1][i] == board[2][i] and board[0][i] != EMPTY:
             winner = board[0][i]
     # Diagnal test
-    if (board[1][1] == board[0][0] == board[2][2]) or (
-        board[1][1] == board[0][2] == board[2][0]
+    if (
+        (board[1][1] == board[0][0] == board[2][2])
+        or (board[1][1] == board[0][2] == board[2][0])
+        and board[1][1] != EMPTY
     ):
         winner = board[1][1]
     return winner
