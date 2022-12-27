@@ -106,12 +106,11 @@ def terminal(board) -> bool:
     """
     Returns True if game is over, False otherwise.
     """
-    cntEmpty = 0
     for row in board:
         for cell in row:
             if cell == EMPTY:
-                cntEmpty += 1
-    return cntEmpty == 0
+                return False
+    return True
 
 
 def utility(board) -> int:
