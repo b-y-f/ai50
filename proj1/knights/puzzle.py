@@ -9,15 +9,23 @@ BKnave = Symbol("B is a Knave")
 CKnight = Symbol("C is a Knight")
 CKnave = Symbol("C is a Knave")
 
-# TODO In each of the above puzzles,
+# In each of the above puzzles,
 # *(This rule is the KEY)*
 # each character is either a knight or a knave.
-
+# They one person cannot be two role at the sametime
+BASECASE = And(
+    Or(AKnight, AKnave),
+    Or(BKnight, BKnave),
+    Or(CKnight, CKnave),
+    Not(And(AKnight, AKnave)),
+    Not(And(BKnight, BKnave)),
+    Not(And(CKnight, CKnave)),
+)
 
 # Puzzle 0
 # A says "I am both a knight and a knave."
 knowledge0 = And(
-    Or(AKnave, AKnight),
+    BASECASE,
     Implication(AKnight, And(AKnight, AKnave)),
     Implication(AKnave, Not(And(AKnight, AKnave))),
 )
@@ -26,8 +34,7 @@ knowledge0 = And(
 # A says "We are both knaves."
 # B says nothing.
 knowledge1 = And(
-    And(Or(AKnight, AKnave), Not(And(AKnight, AKnave))),
-    And(Or(BKnight, BKnave), Not(And(BKnight, BKnave))),
+    BASECASE,
     Implication(AKnight, And(AKnave, BKnave)),
     Implication(AKnave, Not(And(AKnave, BKnave))),
 )
@@ -36,8 +43,7 @@ knowledge1 = And(
 # A says "We are the same kind."
 # B says "We are of different kinds."
 knowledge2 = And(
-    And(Or(AKnight, AKnave), Not(And(AKnight, AKnave))),
-    And(Or(BKnight, BKnave), Not(And(BKnight, BKnave))),
+    BASECASE,
     Implication(AKnight, BKnight),
     Implication(AKnave, BKnight),
     Implication(BKnight, AKnave),
@@ -50,9 +56,7 @@ knowledge2 = And(
 # B says "C is a knave."
 # C says "A is a knight."
 knowledge3 = And(
-    And(Or(AKnight, AKnave), Not(And(AKnight, AKnave))),
-    And(Or(BKnight, BKnave), Not(And(BKnight, BKnave))),
-    And(Or(CKnight, CKnave), Not(And(CKnight, CKnave))),
+    BASECASE,
     Implication(AKnight, Or(AKnave, AKnight)),
     Implication(AKnave, Not(Or(AKnave, AKnight))),
     Implication(And(AKnight, BKnight), BKnave),
