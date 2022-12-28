@@ -127,24 +127,24 @@ def utility(board) -> int:
         return 0
 
 
-def minimax(board):
+def minimax(board) -> tuple | None:
     """
     Returns the optimal action for the current player on the board.
     """
 
-    def calcScore(imagineBoard, isX, depth):
+    def calcScore(imagineBoard, isX):
         # 1. make basic minmax without prune, just make sure everything works
         # 2. then try to use alpha-beta prune technology to optimzed the AI
 
         bestMove = None
-        
-        if terminal(imagineBoard) or depth == 0:
+
+        if terminal(imagineBoard):
             return (utility(imagineBoard), None)
 
         elif isX:
             maxV = -math.inf
             for action in actions(imagineBoard):
-                score, _ = calcScore(result(imagineBoard, action), False, depth - 1)
+                score, _ = calcScore(result(imagineBoard, action), False)
                 if score > maxV:
                     maxV = score
                     bestMove = action
@@ -154,7 +154,7 @@ def minimax(board):
         else:
             minV = math.inf
             for action in actions(imagineBoard):
-                score, _ = calcScore(result(imagineBoard, action), True, depth - 1)
+                score, _ = calcScore(result(imagineBoard, action), True)
                 if score < minV:
                     minV = score
                     bestMove = action
@@ -163,6 +163,5 @@ def minimax(board):
             return (minV, bestMove)
 
     AI = player(board)
-    score, bestMove = calcScore(board, AI == X, 50)
-    print(bestMove)
+    score, bestMove = calcScore(board, AI == X)
     return bestMove
