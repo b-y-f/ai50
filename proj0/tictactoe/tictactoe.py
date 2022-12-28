@@ -148,7 +148,9 @@ def minimax(board):
                 if score > maxV:
                     maxV = score
                     bestMove = action
-            return maxV
+                    if maxV == 1:
+                        break
+            return (maxV, bestMove)
         else:
             minV = math.inf
             for action in actions(imagineBoard):
@@ -156,7 +158,9 @@ def minimax(board):
                 if score < minV:
                     minV = score
                     bestMove = action
-            return minV
+                    if minV == -1:
+                        break
+            return (minV, bestMove)
 
     AI = player(board)
     score, bestMove = calcScore(board, AI == X, 50)
