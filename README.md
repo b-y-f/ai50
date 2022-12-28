@@ -51,3 +51,89 @@ What is the value of the root node?
 
 # Quiz1
 
+The following question will ask you about the following logical sentences.
+1. If Hermione is in the library, then Harry is in the library.
+2. Hermione is in the library.
+3. Ron is in the library and Ron is not in the library.
+4. Harry is in the library.
+5. Harry is not in the library or Hermione is in the library.
+6. Ron is in the library or Hermione is in the library.
+
+Which of the following logical entailments is true?
+
+- Sentence 6 entails Sentence 3 x 
+- Sentence 6 entails Sentence 2 x
+- __Sentence 2 entails Sentence 5 2:T => 5:T/F or T => T__
+- Sentence 1 entails Sentence 4 x
+- Sentence 5 entails Sentence 6 x
+- Sentence 1 entails Sentence 2 x
+
+__Note__: _"entile"_ means if $\alpha$ is `True` then $\beta$ also true.
+
+Can be represented as : $\alpha\models \beta$
+
+
+---
+
+There are other logical connectives that exist, other than the ones discussed in lecture. One of the most common is "Exclusive Or" (represented using the symbol ⊕). The expression A ⊕ B represents the sentence "A or B, but not both." Which of the following is logically equivalent to A ⊕ B?
+
+- (A ∧ B) ∨ ¬ (A ∨ B)
+- __(A ∨ B) ∧ ¬ (A ∧ B)__
+- (A ∨ B) ∧ (A ∧ B)
+- (A ∨ B) ∧ ¬ (A ∨ B)
+
+__Note__:
+
+```python
+# (A ∧ B) ∨ ¬ (A ∨ B)
+def t1(a,b):
+    return (a and b) or not (a or b)
+
+# (A ∨ B) ∧ ¬ (A ∧ B)
+def t2(a,b):
+    return (a or b) and not (a and b)
+
+# (A ∨ B) ∧ (A ∧ B)
+def t3(a,b):
+    return (a or b) and (a and b)
+
+# (A ∨ B) ∧ ¬ (A ∨ B)
+def t4(a,b):
+    return (a or b) and not (a or b)
+
+A = [True, False]
+B = [True, False]
+
+for i in A:
+    for j in B:
+        # print(i,j,t1(i,j))
+        print(i,j,t2(i,j))
+        # print(i,j,t3(i,j))
+        # print(i,j,t4(i,j))
+```
+
+---
+
+
+Let propositional variable R be that "It is raining," the variable C be that "It is cloudy," and the variable S be that "It is sunny." Which of the following a propositional logic representation of the sentence "If it is raining, then it is cloudy and not sunny."?
+
+- (R → C)  ∧ ¬S
+- R → C  → ¬S
+- R ∧ C  ∧ ¬S
+- __R → (C  ∧ ¬S)__
+- (C ∨ ¬S) → R
+
+---
+
+Consider, in first-order logic, the following predicate symbols. Student(x) represents the predicate that "x is a student." Course(x) represents the predicate that "x is a course." Enrolled(x, y) represents the predicate that "x is enrolled in y." Which of the following is a first-order logic translation of the sentence "There is a course that Harry and Hermione are both enrolled in."?
+
+- ∀x. Enrolled(Harry, x) ∧ ∀y. Enrolled(Hermione, y)
+- ∀x. Course(x) ∧ Enrolled(Harry, x) ∧ Enrolled(Hermione, x)
+- ∀x. Enrolled(Harry, x) ∨ Enrolled(Hermione, x)
+- __∃x. Course(x) ∧ Enrolled(Harry, x) ∧ Enrolled(Hermione, x)__
+- ∃x. Enrolled(Harry, x) ∨ Enrolled(Hermione, x)
+- ∃x. Enrolled(Harry, x) ∧ ∃y. Enrolled(Hermione, y)
+
+__Note__:∃x is existential quantification: there __exist an__ object x. ∀x is universal Quantification for __all__ object of x. 
+
+---
