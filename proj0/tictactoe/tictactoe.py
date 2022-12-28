@@ -146,8 +146,7 @@ def minimax(board) -> tuple:
         elif isX:
             maxV = -math.inf
             for action in actions(imagineBoard):
-                newBoard = result(imagineBoard, action)
-                score = calcScore(newBoard, False, depth - 1)
+                score = calcScore(result(imagineBoard, action), False, depth - 1, alpha, beta)
                 if score > maxV:
                     maxV = score
                     bestMove = action
@@ -155,8 +154,7 @@ def minimax(board) -> tuple:
         else:
             minV = math.inf
             for action in actions(imagineBoard):
-                newBoard = result(imagineBoard, action)
-                score = calcScore(newBoard, True, depth - 1)
+                score = calcScore(result(imagineBoard, action), True, depth - 1, alpha, beta)
                 if score < minV:
                     minV = score
                     bestMove = action
