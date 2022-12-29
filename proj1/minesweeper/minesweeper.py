@@ -212,7 +212,7 @@ class MinesweeperAI:
                 for cell in sentence.known_safes().copy():
                     self.mark_safe(cell)
 
-        # 5) merge by rule: set2 - set1 = count2 - count1
+        # 5) Infer new knowledge: merge by rule: set2 - set1 = count2 - count1
         for oldSentence in self.knowledge:
             if neighbors <= oldSentence.cells:  # check if subset
                 diff = neighbors.symmetric_difference(oldSentence.cells)
