@@ -203,6 +203,17 @@ class MinesweeperAI:
                     neighbors.add((i, j))
         self.knowledge.append(Sentence(neighbors, count))
 
+        # 5) Infer new knowledge: merge by rule: set2 - set1 = count2 - count1
+        for oldSentence in self.knowledge:
+            if (
+                oldSentence.cells != neighbors
+                and oldSentence.count > 0
+                and oldSentence.cells <= neighbors
+            ):  # check if subset
+                diff = neighbors.symmetric_difference(oldSentence.cells)
+                newSentence = Sentence(diff, oldSentence.count - count)
+                self.knowledge.append(newSentence)
+
         # 4) mark cells based on KB(Sentences)
         for sentence in self.knowledge:
             if sentence.known_mines():
@@ -211,13 +222,6 @@ class MinesweeperAI:
             if sentence.known_safes():
                 for cell in sentence.known_safes().copy():
                     self.mark_safe(cell)
-
-        # 5) Infer new knowledge: merge by rule: set2 - set1 = count2 - count1
-        for oldSentence in self.knowledge:
-            if neighbors <= oldSentence.cells:  # check if subset
-                diff = neighbors.symmetric_difference(oldSentence.cells)
-                newSentence = Sentence(diff, oldSentence.count - count)
-                self.knowledge.append(newSentence)
 
     def make_safe_move(self):
         """
