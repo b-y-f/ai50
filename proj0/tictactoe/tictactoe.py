@@ -3,7 +3,6 @@ Tic Tac Toe Player
 """
 
 import math
-from typing import List
 import copy
 
 X = "X"
@@ -18,7 +17,7 @@ def initial_state():
     return [[EMPTY, EMPTY, EMPTY], [EMPTY, EMPTY, EMPTY], [EMPTY, EMPTY, EMPTY]]
 
 
-def player(board) -> str:
+def player(board):
     """
     Returns player who has the next turn on a board.
     The player function should take a board state as input, and return which player’s turn it is (either X or O).
@@ -37,7 +36,7 @@ def player(board) -> str:
     return X if countX == countO else O
 
 
-def actions(board) -> set:
+def actions(board):
     """
     Returns set of all possible actions (i, j) available on the board.
     The actions function should return a set of all of the possible actions that can be taken on a given board.
@@ -54,7 +53,7 @@ def actions(board) -> set:
     return actions
 
 
-def result(board, action) -> List:
+def result(board, action):
     """
     Returns the board that results from making move (i, j) on the board.
     The result function takes a board and an action as input, and should return a new board state, without modifying the original board.
@@ -76,7 +75,7 @@ def result(board, action) -> List:
     return newBoard
 
 
-def winner(board) -> str | None:
+def winner(board):
     """
     Returns the winner of the game, if there is one.
     The winner function should accept a board as input, and return the winner of the board if there is one.
@@ -102,7 +101,7 @@ def winner(board) -> str | None:
     return winner
 
 
-def terminal(board) -> bool:
+def terminal(board):
     """
     Returns True if game is over, False otherwise.
     """
@@ -115,7 +114,7 @@ def terminal(board) -> bool:
     return True
 
 
-def utility(board) -> int:
+def utility(board):
     """
     Returns 1 if X has won the game, -1 if O has won, 0 otherwise.
     """
@@ -127,7 +126,7 @@ def utility(board) -> int:
         return 0
 
 
-def minimax(board) -> tuple | None:
+def minimax(board):
     """
     Returns the optimal action for the current player on the board.
     """
