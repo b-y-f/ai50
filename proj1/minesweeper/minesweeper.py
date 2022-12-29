@@ -190,9 +190,12 @@ class MinesweeperAI:
         # 3) look around and add cells of count to list and make
         # something like {A,B,C,..} = count
         neighbors = set()
+        cntMines = 0
         cell_i, cell_j = cell
         for i in range(cell_i - 1, cell_i + 2):
             for j in range(cell_j - 1, cell_j + 2):
+                if (i, j) in self.mines:
+                    cntMines += 1
                 if (
                     0 <= i < self.height
                     and 0 <= j < self.width
@@ -201,7 +204,7 @@ class MinesweeperAI:
                     and (i, j) not in self.safes
                 ):
                     neighbors.add((i, j))
-        self.knowledge.append(Sentence(neighbors, count))
+        self.knowledge.append(Sentence(neighbors, count - cntMines))
 
         # 5) Infer new knowledge: merge by rule: set2 - set1 = count2 - count1
         for oldSentence in self.knowledge:
