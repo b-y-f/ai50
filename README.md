@@ -137,3 +137,44 @@ Consider, in first-order logic, the following predicate symbols. Student(x) repr
 __Note__:∃x is existential quantification: there __exist an__ object x. ∀x is universal Quantification for __all__ object of x. 
 
 ---
+
+# Quiz2
+
+Consider a standard 52-card deck of cards with 13 card values (Ace, King, Queen, Jack, and 2-10) in each of the four suits (clubs, diamonds, hearts, spades). If a card is drawn at random, what is the probability that it is a spade or a two?
+
+>Note that "or" in this question refers to inclusive, not exclusive, or.
+
+__Note__: Let $A$ represent event of possiblilty get spade, $B$ is event get number two, $A$ and $B$ both __not mutually exclusive__:
+
+$$
+P(A \cup B) = P(A) + P(B) - P(A \cap B)\\
+= 1/4 + 1/13 - 1/52 \approx 0.308
+$$
+
+---
+
+Imagine flipping two fair coins, where each coin has a Heads side and a Tails side, with Heads coming up 50% of the time and Tails coming up 50% of the time. What is probability that after flipping those two coins, one of them lands heads and the other lands tails?
+
+1/2
+
+---
+
+The following question will ask you about the Bayesian Network shown in lecture, reproduced below.
+
+![](https://lh4.googleusercontent.com/6aw76BG0O9NT3HroqN_aW8Q6MRq1gN4RG8U0r_JHJTidIHRQ2Do_GfZh7R39Uai2Hsh6Oa1uOGXT60p3wJbjRq8hfhlVqOnnG4zk7AkYObf_Q4h6QD5_WARYeRsiLPAc1w=w520)
+
+Which of the following sentences is true?
+
+- Assuming we know the train is on time, whether or not there is rain affects the probability that the appointment is attended.
+- Assuming we know there is track maintenance, whether or not there is rain does not affect the probability that the appointment is attended.
+- Assuming we know there is rain, whether or not there is track maintenance does not affect the probability that the train is on time.
+- __Assuming we know the train is on time, whether or not there is track maintenance does not affect the probability that the appointment is attended.__
+- Assuming we know there is track maintenance, whether or not there is rain does not affect the probability that the train is on time.
+
+---
+
+Two factories — Factory A and Factory B — design batteries to be used in mobile phones. Factory A produces 60% of all batteries, and Factory B produces the other 40%. 2% of Factory A's batteries have defects, and 4% of Factory B's batteries have defects. What is the probability that a battery is both made by Factory A and defective?
+
+$$
+P(defective \cap by A) = 60\% \cdot 4\% = 1.2\%
+$$
