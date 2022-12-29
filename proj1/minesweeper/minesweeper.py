@@ -203,7 +203,7 @@ class MinesweeperAI:
                     neighbors.add((i, j))
         self.knowledge.append(Sentence(neighbors, count))
 
-        # 4) mark cells based on KB
+        # 4) mark cells based on KB(Sentences)
         for sentence in self.knowledge:
             if sentence.known_mines():
                 for cell in sentence.known_mines().copy():
