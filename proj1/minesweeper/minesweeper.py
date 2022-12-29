@@ -2,7 +2,7 @@ import itertools
 import random
 
 
-class Minesweeper():
+class Minesweeper:
     """
     Minesweeper game representation
     """
@@ -84,7 +84,7 @@ class Minesweeper():
         return self.mines_found == self.mines
 
 
-class Sentence():
+class Sentence:
     """
     Logical statement about a Minesweeper game
     A sentence consists of a set of board cells,
@@ -122,7 +122,6 @@ class Sentence():
             self.cells.remove(cell)
             self.count -= 1
 
-
     def mark_safe(self, cell):
         """
         Updates internal knowledge representation given the fact that
@@ -132,7 +131,7 @@ class Sentence():
             self.cells.remove(cell)
 
 
-class MinesweeperAI():
+class MinesweeperAI:
     """
     Minesweeper game player
     """
@@ -186,7 +185,39 @@ class MinesweeperAI():
             5) add any new sentences to the AI's knowledge base
                if they can be inferred from existing knowledge
         """
-        
+        self.moves_made.add(cell)
+        self.safes.add(cell)
+        # 3) look around and add cells of count to list and make
+        # something like {A,B,C,..} = count
+        neighbors = set()
+        cell_i, cell_j = cell
+        for i in range(cell_i - 1, cell_i + 2):
+            for j in range(cell_j - 1, cell_j + 2):
+                if (
+                    0 <= i < self.height
+                    and 0 <= j < self.width
+                    and (i, j) != cell
+                    and (i, j) not in self.mines
+                    and (i, j) not in self.safes
+                ):
+                    neighbors.add((i, j))
+        self.knowledge.append(Sentence(neighbors, count))
+
+        # 4) mark cells based on KB
+        for sentence in self.knowledge:
+            if sentence.known_mines():
+                for cell in sentence.known_mines().copy():
+                    self.mark_mine(cell)
+            if sentence.known_safes():
+                for cell in sentence.known_safes().copy():
+                    self.mark_safe(cell)
+
+        # 5) merge by rule: set2 - set1 = count2 - count1
+        for oldSentence in self.knowledge:
+            if neighbors <= oldSentence.cells:  # check if subset
+                diff = neighbors.symmetric_difference(oldSentence.cells)
+                newSentence = Sentence(diff, oldSentence.count - count)
+                self.knowledge.append(newSentence)
 
     def make_safe_move(self):
         """
@@ -212,7 +243,6 @@ class MinesweeperAI():
         pool = []
         for i in range(self.height):
             for j in range(self.width):
-                if (i,j) not in self.moves_made and (i,j) not in self.mines:
-                    pool.append((i,j))
-        return random.choice(pool) if len(pool)>0 else None
-
+                if (i, j) not in self.moves_made and (i, j) not in self.mines:
+                    pool.append((i, j))
+        return random.choice(pool) if len(pool) > 0 else None
