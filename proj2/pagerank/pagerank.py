@@ -105,7 +105,27 @@ def iterate_pagerank(corpus, damping_factor):
     their estimated PageRank value (a value between 0 and 1). All
     PageRank values should sum to 1.
     """
-    raise NotImplementedError
+    N = len(corpus.keys())
+
+    dist = {p: 1 / N for p in corpus}
+    flag = 0
+    while True:
+        for page in corpus:
+            curr_prob = 0
+            # this is the key, stack in here for a while.
+            # have to ignore those not avalible for recursive calculation
+            for linked_page in [p for p, linked in corpus.items() if page in linked]:
+                curr_prob += dist[linked_page] / len(corpus[linked_page])
+
+            curr_prob = (1 - damping_factor) / N + curr_prob * damping_factor
+
+            # used all() before, but use flag inside loop more efficent
+            if abs(dist[page] - curr_prob) < 0.001:
+                flag += 1
+            dist[page] = curr_prob
+
+            if flag == N:
+                return dist
 
 
 if __name__ == "__main__":
