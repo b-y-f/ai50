@@ -176,5 +176,5 @@ Which of the following sentences is true?
 Two factories — Factory A and Factory B — design batteries to be used in mobile phones. Factory A produces 60% of all batteries, and Factory B produces the other 40%. 2% of Factory A's batteries have defects, and 4% of Factory B's batteries have defects. What is the probability that a battery is both made by Factory A and defective?
 
 $$
-P(defective \cap by A) = 60\% \cdot 4\% = 1.2\%
+P(defective \cap by A) = 0.6 \cdot 0.04 = 0.0024
 $$
