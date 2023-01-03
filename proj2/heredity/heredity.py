@@ -157,7 +157,7 @@ def joint_probability(people, one_gene, two_genes, have_trait):
                 # probability of passing gene to children
                 # Only consider if gene can pass could make problem simpler
                 if par in one_gene:
-                    parents[par] = 0.5
+                    parents[par] = 0.5 # used be 0.5 - PROBS["mutation"], but the result is different with displayed...
                 elif par in two_genes:
                     parents[par] = 1 - PROBS["mutation"]
                 else:
