@@ -139,15 +139,18 @@ def joint_probability(people, one_gene, two_genes, have_trait):
         * everyone in set `have_trait` has the trait, and
         * everyone not in set` have_trait` does not have the trait.
     """
+    # to solve this problem, the best way is to draw a desicion tree on notebook
+    # then, there will be more clear which condition to check
     p = 1
     for person, attr in people.items():
         gene_num = 2 if person in two_genes else 1 if person in one_gene else 0
         is_trait = person in have_trait
         mom = attr["mother"]
         dad = attr["father"]
-
+        # if the person not got parents use simple method
         if mom is None and dad is None:
             p *= PROBS["gene"][gene_num]
+        # if he got parents, we need to infer his prob by compute parents prob
         else:
             parents = {mom: 0, dad: 0}
             for par in parents:
@@ -160,6 +163,7 @@ def joint_probability(people, one_gene, two_genes, have_trait):
                 else:
                     parents[par] = PROBS["mutation"]
 
+            # merge parents prob to get child's prob to have this gene
             if gene_num == 0:
                 p *= (1 - parents[mom]) * (1 - parents[dad])
             elif gene_num == 1:
