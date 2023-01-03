@@ -237,3 +237,42 @@ After enforcing arc consistency on this entire problem, what are the resulting d
 __Note__: Just prune element until everything along "edge" different.
 
 ---
+
+
+# Quiz 4
+
+Categorize the following as supervised learning, reinforcement learning, unsupervised learning, or not machine learning: __A social network’s AI uses existing tagged photos of people to identify when those people appear in new photos.__
+
+Answer: Supervised learning
+
+---
+
+Imagine a regression AI that makes the following predictions for the following 5 data points. What is the total L2 loss across all of these data points (i.e., the sum of all the individual L2 losses for each data point)?
+
+>For data point 1, the true output is 2 and the AI predicted 4. For data point 2, the true output is 4 and the AI predicted 5. For data point 3, the true output is 4 and the AI predicted 3. For data point 4, the true output is 5 and the AI predicted 2. For data point 5, the true output is 6 and the AI predicted 5.
+
+Answer: 16
+
+__Note__: From L2 function $L =\sum(actual - pred)^{2}$, answer can be easily calcualted.
+
+---
+
+If Hypothesis 1 has a lower L1 loss and a lower L2 loss than Hypothesis 2 on a set of training data, why might Hypothesis 2 still be a preferable hypothesis?
+
+- Hypothesis 1 might be the result of loss.
+- Hypothesis 1 might be the result of cross-validation.
+- Hypothesis 1 might be the result of regularization.
+- __Hypothesis 1 might be the result of overfitting.__
+- Hypothesis 1 might be the result of regression.
+
+---
+
+In the ε-greedy approach to action selection in reinforcement learning, which of the following values of ε makes the approach identical to a purely greedy approach?
+
+Answer: 0 
+
+__Note__:ε is how offen we want move randomly. By defination : __A greedy algorithm is an approach for solving a problem by selecting the best option available at the moment.__ 1 - ε is to choice best move.
+
+
+
+
