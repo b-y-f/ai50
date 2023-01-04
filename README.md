@@ -274,5 +274,48 @@ Answer: 0
 __Note__:ε is how offen we want move randomly. By defination : __A greedy algorithm is an approach for solving a problem by selecting the best option available at the moment.__ 1 - ε is to choice best move.
 
 
+---
+
+# Quiz 5
+
+The following question will ask you about the below neural network, where we set w0 = -5, w1 = 2, w2 = -1, and w3 = 3. x1, x2, and x3 represent input neurons, and y represents the output neuron.
+
+![](https://lh5.googleusercontent.com/Dl-kkbtyDwzkACM2teVcOM49UeAj14e-h9ducd3D8gp3ljTN1SDfC8MP2lrvNcLA0rxQbgd5-DWefDINKnaWwNEI_y_Qq6FVHj3BVeW-0xej8f1IYeBLjeELHaym1vR-yQ=w699)
+
+
+What value will this network compute for y given inputs x1 = 3, x2 = 2, and x3 = 4 if we use a step activation function? What if we use a ReLU activation function?
+
+A: 1 for step activation function, 11 for ReLU activation function
+
+
+---
+
+
+How many total weights (including biases) will there be for a fully connected neural network with a single input layer with 3 units, a single hidden layer with 5 units, and a single output layer with 4 units?
+
+A: $3 \cdot 5 + 5 + 5 \cdot 4 + 4 = 44$
+
+---
+
+Consider a recurrent neural network that listens to a audio speech sample, and classifies it according to whose voice it is. What network architecture is the best fit for this problem?
+
+A: Many-to-one (multiple inputs, single output)
+
+__Note__: Since audio speed is a sequence of information, we can use it frame by frame as input to NN, and learn more information from previous model. In the end we will identify who the audio belongs to which person. 
+
+---
+
+The following question will ask you about a 4x4 grayscale image with the following pixel values.
+
+
+![](https://lh6.googleusercontent.com/PCvuuTr6WMg518wI5x9AVJy6F0EspzWz6oJEpN_NpL6zQovHyZyOYxCnbj7yLwFf5-mSMWR0fElswujbZF4ZFDBZCXBSnb75-SPcy4_HOZuWmoejKQhXE8hveLclzjAoqQ=w319)
+
+What would be the result of applying a 2x2 max-pool to the original image?
+
+> Answers are formatted as a matrix [[a, b], [c, d]] where [a, b] is the first row and [c, d] is the second row.
+
+A: [[16, 12], [32, 28]]
+
+__Note__: ![](https://media.geeksforgeeks.org/wp-content/uploads/20190721025744/Screenshot-2019-07-21-at-2.57.13-AM.png)
 
 
