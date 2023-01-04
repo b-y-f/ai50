@@ -59,7 +59,74 @@ def load_data(filename):
     labels should be the corresponding list of labels, where each label
     is 1 if Revenue is true, and 0 otherwise.
     """
-    raise NotImplementedError
+
+    def month_to_int(x):
+        months = {
+            "jan": 1,
+            "feb": 2,
+            "mar": 3,
+            "apr": 4,
+            "may": 5,
+            "jun": 6,
+            "jul": 7,
+            "aug": 8,
+            "sep": 9,
+            "oct": 10,
+            "nov": 11,
+            "dec": 12,
+        }
+        return months[x.strip()[:3].lower()] - 1
+
+    evidences = []
+    labels = []
+
+    int_cols = [0, 2, 4, 11, 12, 13, 14]
+    float_cols = [1, 3, 5, 6, 7, 8, 9]
+    check = True
+    with open(filename, newline="") as csvfile:
+        reader = csv.reader(csvfile, delimiter=",")
+        # skip header
+        next(reader)
+        for row in reader:
+            for i in int_cols:
+                row[i] = int(row[i])
+            for i in float_cols:
+                row[i] = float(row[i])
+
+            # month to int
+            row[10] = month_to_int(row[10])
+
+            # bool to int
+            for i in [15, 16, 17]:
+                row[i] = 1 if row[i][0].lower() in ["t", "r"] else 0
+
+            # check first row
+            if check:
+                check = False
+                assert row == [
+                    0,
+                    0.0,
+                    0,
+                    0.0,
+                    1,
+                    0.0,
+                    0.2,
+                    0.2,
+                    0.0,
+                    0.0,
+                    1,
+                    1,
+                    1,
+                    1,
+                    1,
+                    1,
+                    0,
+                    0,
+                ]
+
+            evidences.append(row[:17])
+            labels.append(row[-1])
+    return (evidences, labels)
 
 
 def train_model(evidence, labels):
