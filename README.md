@@ -318,4 +318,71 @@ A: [[16, 12], [32, 28]]
 
 __Note__: ![](https://media.geeksforgeeks.org/wp-content/uploads/20190721025744/Screenshot-2019-07-21-at-2.57.13-AM.png)
 
+---
 
+Quiz 6
+
+The following question will ask you about the below context-free grammar, where S is the start symbol.
+
+![](https://lh4.googleusercontent.com/ZBC2-UH01Ww9_9wyPi04trSSMAPiLXZA5mRV7q-gW27I7grMhZ4uH0pb5mK_oY2YpPL7mj5jmUCb_aqbC2zT5MFxHqUSLWF6TLKbbV7PatJYwkLGJ89UJ83Jnj1lXIj18g=w578)
+
+The following question will also ask you about the following four sentences.
+- Sentence 1: Cats run.
+- Sentence 2: Cats climb trees.
+- Sentence 3: Small cats run.
+- Sentence 4: Small white cats climb.
+
+Of the four sentences above, which sentences can be derived from the above context-free grammar?
+
+- Only Sentence 1
+- Only Sentence 1 and Sentence 2
+- Only Sentence 1 and Sentence 3
+- Only Sentence 1 and Sentence 4
+- Only Sentence 1, Sentence 2, and Sentence 3
+- Only Sentence 1, Sentence 2, and Sentence 4
+- __Only Sentence 1, Sentence 3, and Sentence 4__
+- All four sentences
+- None of the four sentences
+
+__Note__: 
+
+- s1 = NP(N) V (ok)
+- s2 = NP V N (wrong)
+- s3 = NP(A N) V (ok)
+- s4 = A A N(NP) V (ok)
+
+---
+
+The following question will ask you about a corpus with the following documents.
+
+- Document 1: a a b c
+- Document 2: a c c c d e f
+- Document 3: a c d d d
+- Document 4: a d f
+
+What is the tf-idf value for "d" in Document 3?
+
+> Round answers to two decimal places. Use the natural logarithm (log base e) when taking a logarithm.
+
+$$
+tf = \frac{3}{5}\\
+idf = \ln{\frac{4}{3}} \\
+tf \cdot idf \approx 0.17
+$$
+
+__Note__: Answer might got problem!
+
+---
+
+Why is "smoothing" useful when applying Naive Bayes?
+
+- Smoothing allows Naive Bayes to be less "naive" by not assuming that evidence is conditionally independent.
+- Smoothing allows Naive Bayes to turn a conditional probability of evidence given a category into a probability of a category given evidence.
+- __Smoothing allows Naive Bayes to better handle cases where evidence has never appeared for a particular category.__
+- Smoothing allows Naive Bayes to better handle cases where there are many categories to classify between, instead of just two.
+
+---
+
+From the phrase "must be the truth", how many word n-grams of length 2 can be extracted?
+
+A: 3
