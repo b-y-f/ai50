@@ -19,7 +19,6 @@ def main():
     print(f"PageRank Results from Iteration")
     for page in sorted(ranks):
         print(f"  {page}: {ranks[page]:.4f}")
-    
 
 
 def crawl(directory):
@@ -41,10 +40,7 @@ def crawl(directory):
 
     # Only include links to other pages in the corpus
     for filename in pages:
-        pages[filename] = set(
-            link for link in pages[filename]
-            if link in pages
-        )
+        pages[filename] = set(link for link in pages[filename] if link in pages)
 
     return pages
 
@@ -113,9 +109,13 @@ def iterate_pagerank(corpus, damping_factor):
         for page in corpus:
             curr_prob = 0
             # this is the key, stack in here for a while.
-            # have to ignore those not avalible for recursive calculation
-            for linked_page in [p for p, linked in corpus.items() if page in linked]:
-                curr_prob += dist[linked_page] / len(corpus[linked_page])
+            # some edge cases in here, when nothing connect to
+            # sub-pages, treat them as full length
+            for linked_page in corpus:
+                if page in corpus[linked_page]:
+                    curr_prob += dist[linked_page] / len(corpus[linked_page])
+                if not corpus[linked_page]:
+                    curr_prob += dist[linked_page] / N
 
             curr_prob = (1 - damping_factor) / N + curr_prob * damping_factor
 
