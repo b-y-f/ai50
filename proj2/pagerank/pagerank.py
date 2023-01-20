@@ -103,29 +103,29 @@ def iterate_pagerank(corpus, damping_factor):
     """
     N = len(corpus.keys())
 
-    dist = {p: 1 / N for p in corpus}
+    curr_rank = {p: 1 / N for p in corpus}
     flag = 0
     while True:
         for page in corpus:
-            curr_prob = 0
+            new_rank_value = 0
             # this is the key, stack in here for a while.
             # some edge cases in here, when nothing connect to
             # sub-pages, treat them as full length
             for linked_page in corpus:
                 if page in corpus[linked_page]:
-                    curr_prob += dist[linked_page] / len(corpus[linked_page])
+                    new_rank_value += curr_rank[linked_page] / len(corpus[linked_page])
                 if not corpus[linked_page]:
-                    curr_prob += dist[linked_page] / N
+                    new_rank_value += curr_rank[linked_page] / N
 
-            curr_prob = (1 - damping_factor) / N + curr_prob * damping_factor
+            new_rank_value = (1 - damping_factor) / N + new_rank_value * damping_factor
 
             # used all() before, but use flag inside loop more efficent
-            if abs(dist[page] - curr_prob) < 0.001:
+            if abs(curr_rank[page] - new_rank_value) < 0.001:
                 flag += 1
-            dist[page] = curr_prob
+            curr_rank[page] = new_rank_value
 
             if flag == N:
-                return dist
+                return curr_rank
 
 
 if __name__ == "__main__":
